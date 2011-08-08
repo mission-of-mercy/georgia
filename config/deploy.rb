@@ -11,7 +11,7 @@ set :user, "deploy"
 set :deploy_to, "/home/deploy/#{application}"
 set :use_sudo, false
 
-server "mom.integrityss.com", :app, :web, :db, :primary => true
+server "gmom.aautomate.com", :app, :web, :db, :primary => true
 
 task :local do
   set :repository, Dir.pwd
