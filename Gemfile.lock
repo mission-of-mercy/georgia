@@ -66,6 +66,7 @@ GEM
       json
     childprocess (0.3.6)
       ffi (~> 1.0, >= 1.0.6)
+    chronic (0.9.1)
     chunky_png (1.2.7)
     coderay (1.0.8)
     coffee-rails (3.2.2)
@@ -208,6 +209,9 @@ GEM
     warden (1.2.1)
       rack (>= 1.0)
     websocket (1.0.6)
+    whenever (0.8.2)
+      activesupport (>= 2.3.4)
+      chronic (>= 0.6.3)
     will_paginate (3.0.4)
     will_paginate-bootstrap (0.2.2)
       will_paginate (>= 3.0.3)
@@ -254,5 +258,6 @@ DEPENDENCIES
   turn
   uglifier
   virtus
+  whenever (~> 0.8.2)
   will_paginate (~> 3.0.2)
   will_paginate-bootstrap

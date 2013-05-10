@@ -23,6 +23,8 @@ gem 'rails_setup'
 gem 'faker',        :require => false
 gem 'rubyzip',      :require => false
 
+gem "whenever", '~> 0.8.2', :require => false
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.0'
   gem 'coffee-rails', '~> 3.2.0'
