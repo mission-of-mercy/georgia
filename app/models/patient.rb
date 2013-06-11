@@ -77,10 +77,6 @@ class Patient < ActiveRecord::Base
     where("patients.created_at::Date = ?", Date.today)
   end
 
-  def self.unique
-    Patient.where(previous_chart_number: nil)
-  end
-
   def chart_number
     id
   end
@@ -90,11 +86,7 @@ class Patient < ActiveRecord::Base
   end
 
   def age
-    today = DateTime.now
-    age = today - date_of_birth
-    age.to_i / 365
-  rescue
-    nil
+    (Date.today - date_of_birth).to_i / 365
   end
 
   def contact_information
@@ -117,15 +109,21 @@ class Patient < ActiveRecord::Base
   def check_out(area)
     return unless area
 
-    assignment = assignments.not_checked_out.where(treatment_area_id: area.id).first
-
-    if area.radiology?
+    to_check_out = if area.radiology?
       self.flows.create(area_id: ClinicArea::XRAY)
+
+      assignments.where(treatment_area_id: area.id).not_checked_out
     else
       self.flows.create(area_id: ClinicArea::CHECKOUT, treatment_area_id: area.id)
+
+      assignments.not_checked_out
     end
 
-    assignment.check_out if assignment
+    to_check_out.each {|assignment| assignment.check_out }
+  end
+
+  def checked_out?
+    flows.where(area_id: ClinicArea::CHECKOUT).any?
   end
 
   def assign(area_id, radiology)
@@ -253,7 +251,7 @@ class Patient < ActiveRecord::Base
   private
 
   def update_survey
-    return if !previous_chart_number.blank?
+    return if previous_chart_number.present?
 
     survey.update_patient_information(self) if survey
   end
