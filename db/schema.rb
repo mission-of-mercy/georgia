@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130414151507) do
+ActiveRecord::Schema.define(:version => 20130614194915) do
 
   create_table "heard_about_clinics", :force => true do |t|
     t.string   "reason"
@@ -168,6 +168,7 @@ ActiveRecord::Schema.define(:version => 20130414151507) do
     t.datetime "resolved_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "sent",              :default => false
   end
 
   create_table "surveys", :force => true do |t|
