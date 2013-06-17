@@ -1,4 +1,6 @@
 class SupportRequest < ActiveRecord::Base
+  after_create :send_sms
+
   belongs_to :user
   belongs_to :treatment_area
 
@@ -21,5 +23,13 @@ class SupportRequest < ActiveRecord::Base
       :ip_address           => ip_address,
       :station_description  => station_description
     }
+  end
+
+  private
+
+  def send_sms
+    Resque.enqueue(SupportNotification, station_description, created_at)
+  rescue StandardError
+    true
   end
 end

@@ -23,7 +23,8 @@ end
 after 'deploy:update_code' do
   { "database.yml"    => "config/database.yml",
     "mom.yml"         => "config/mom.yml",
-    "secret_token.rb" => "config/initializers/secret_token.rb"}.
+    "secret_token.rb" => "config/initializers/secret_token.rb",
+    "twilio.rb"       => "config/initializers/twilio.rb"}.
    each do |from, to|
      run "ln -nfs #{shared_path}/#{from} #{release_path}/#{to}"
    end

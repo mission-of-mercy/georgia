@@ -20,6 +20,9 @@ gem 'axlsx_rails'
 gem 'jquery-rails'
 gem 'will_paginate-bootstrap'
 
+gem 'resque'
+gem 'twilio'
+
 gem 'rails_setup'
 gem 'faker',        :require => false
 gem 'rubyzip',      :require => false
